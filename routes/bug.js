@@ -1,7 +1,8 @@
 const express = require("express"),
       router  = express.Router(),
       Bug = require("../models/bug");
-       
+
+// INDEX
 router.get("/", function(req, res){
     Bug.find({}, function(err, bugs){
         if (err) {
@@ -11,5 +12,13 @@ router.get("/", function(req, res){
         }
     });
 });
+
+// NEW
+router.get("/new", function(req, res){
+    res.render("new");
+})
+
+
+
 
 module.exports = router;
