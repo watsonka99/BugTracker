@@ -16,7 +16,25 @@ router.get("/", function(req, res){
 // NEW
 router.get("/new", function(req, res){
     res.render("new");
-})
+});
+
+// CREATE
+router.post("/", function(req, res){
+    Bug.create({
+        summary: req.body.summary,
+        stepsToReproduce: req.body.stepsToReproduce,
+        expectedResults: req.body.expectedResults,
+        actualResults: req.body.actualResults
+    }, function(err, newBug){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/bugs");
+        }
+    });
+});
+
+
 
 
 
