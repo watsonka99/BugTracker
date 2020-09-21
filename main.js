@@ -9,7 +9,6 @@ app.set("view engine", "ejs");
 app.use(indexRoutes);
 app.use("/bugs", bugsRoutes);
 
-
 mongoose.connect("mongodb://localhost:27017/auth", {
     useNewUrlParser: true,
     useUnifiedTopology: true
