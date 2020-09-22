@@ -1,19 +1,19 @@
 <%- include ("./partials/header") %>
-<h1>All my bugs</h1>
 
-<ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/bugs">bugs</a></li>
-    <li><a href="/bugs/new">bugs</a></li>
-</ul>
 
-<h1>bugs</h1>
-<div>
+<div class= "ui container segment">
+<h1 class="ui header">Bugs</h1>
 <% bugs.forEach(function(bug){%>
-    <div class="container">
-        <%=bug.summary%>
+    <div class="ui container raised text segment">
+        
+        <div>
+            <%=bug.summary%>
+        </div>
+        <%=bug.stepsToReproduce%>
+        <%=bug.expectedResults%>
+        <%=bug.actualResults%>
     </div>
 <% }) %>
 </div>
-
+<a href="/bugs/new">bugs</a>
 <%- include ("./partials/footer") %>
