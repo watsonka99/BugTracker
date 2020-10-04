@@ -4,7 +4,8 @@ const BugSchema = new mongoose.Schema({
     summary: String,
     stepsToReproduce: String,
     expectedResults: String,
-    actualResults: String
+    actualResults: String,
+    reported: {type: Date, default: Date.now}
 });
 
 

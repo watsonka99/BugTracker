@@ -9,6 +9,7 @@ const express = require('express'),
 
 const indexRoutes = require("./routes/index"),
     bugsRoutes = require("./routes/bug"),
+    userRoutes = require("./routes/user")
     User = require("./models/user"),
     Bug = require("./models/bug");
 
@@ -40,10 +41,12 @@ app.use(function(req, res, next){
 app.set("view engine", "ejs");
 app.use(indexRoutes);
 app.use("/bugs", bugsRoutes);
+app.use(userRoutes);
 
 mongoose.connect("mongodb://localhost:27017/auth", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true, 
+    useFindAndModify: false 
 })
 .then(() => console.log('Connected to DB!'))
 .catch(error => console.log(error.message));   
