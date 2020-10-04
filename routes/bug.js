@@ -42,39 +42,39 @@ router.get("/:id", function(req, res) {
         } else {
             res.render("show", {bug:foundBug});
         }
-    })
+    });
 });
 
 // edit
 router.get("/:id/edit", function(req, res){
     Bug.findById(req.params.id, function(err, foundBug){
-      if(err){
-        res.redirect("back");
-      } else {
-        res.render("edit", {bug:foundBug});
-      }
-    })
-  });
+        if(err){
+            res.redirect("back");
+        } else {
+            res.render("edit", {bug:foundBug});
+        }
+    });
+});
   
-  // update
-  router.put("/:id", function(req, res){
+// update
+router.put("/:id", function(req, res){
     Bug.findByIdAndUpdate(req.params.id, req.body.bug, function(err, updatedBug){
-      if (err){
-        res.redirect(back);
-      } else {
-        res.redirect("/bugs/" + req.params.id);
-      }
-    })
-  });
+        if (err){
+            res.redirect(back);
+        } else {
+            res.redirect("/bugs/" + req.params.id);
+        }
+    });
+});
   
   // Destroy
 router.delete("/:id", function(req, res){
     Bug.findByIdAndRemove(req.params.id, function(err){
-      if (err){
-        res.redirect("/bugs");
-      } else {
-        res.redirect("/bugs");
-      }
+        if (err){
+            res.redirect("/bugs");
+        } else {
+            res.redirect("/bugs");
+        }
     });
 });
 
