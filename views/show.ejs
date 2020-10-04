@@ -7,4 +7,7 @@
     edit
     <i class ="right chevron icon"></i>
 </a>
+<form id="delete" action="/bugs/<%=bug._id%>?_method=DELETE" method="POST">
+    <button class="ui floated basic red button">Delete <i class ="right chevron icon"></i></button>
+</form>
 <%- include ("./partials/footer") %>

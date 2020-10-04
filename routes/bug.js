@@ -67,5 +67,15 @@ router.get("/:id/edit", function(req, res){
     })
   });
   
+  // Destroy
+router.delete("/:id", function(req, res){
+    Bug.findByIdAndRemove(req.params.id, function(err){
+      if (err){
+        res.redirect("/bugs");
+      } else {
+        res.redirect("/bugs");
+      }
+    });
+});
 
 module.exports = router;
