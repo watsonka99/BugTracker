@@ -34,5 +34,15 @@ router.post("/", function(req, res){
     });
 });
 
+// show
+router.get("/:id", function(req, res) {
+    Bug.findById(req.params.id, function(err, foundBlog){
+        if(err){
+            res.redirect(back);
+        } else {
+            res.render("show", {blog:foundBlog});
+        }
+    })
+});
 
 module.exports = router;
