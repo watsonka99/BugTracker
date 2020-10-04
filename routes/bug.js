@@ -8,14 +8,14 @@ router.get("/", function(req, res){
         if (err) {
             console.log(err);
         } else {
-            res.render("index", {bugs: bugs});  
+            res.render("bug/index", {bugs: bugs});  
         }
     });
 });
 
 // NEW
 router.get("/new", function(req, res){
-    res.render("new");
+    res.render("bug/new");
 });
 
 // CREATE
@@ -40,7 +40,7 @@ router.get("/:id", function(req, res) {
         if(err){
             res.redirect(back);
         } else {
-            res.render("show", {bug:foundBug});
+            res.render("bug/show", {bug:foundBug});
         }
     });
 });
@@ -51,7 +51,7 @@ router.get("/:id/edit", function(req, res){
         if(err){
             res.redirect("back");
         } else {
-            res.render("edit", {bug:foundBug});
+            res.render("bug/edit", {bug:foundBug});
         }
     });
 });
