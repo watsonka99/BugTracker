@@ -1,0 +1,22 @@
+<%- include ("./partials/header") %>
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit Bug</div>
+    <form class="ui form" action="/bugs/<%=bug._id%>?_method=PUT" method="POST">
+        <div class="field">
+            <input  type="text" name="bug[summary]" placeholder="summary">
+        </div>
+        <div class="field">
+            <input  type="text" name="bug[stepsToReproduce]" placeholder="Steps To Reproduce">
+        </div>
+        <div class="field">
+            <input  type="text" name="bug[expectedResults]" placeholder="Expected Results">
+        </div>
+        <div class="field">
+            <input  type="text" name="bug[actualResults]" placeholder="ActualResults">
+        </div>
+        <div class="field">
+            <button class="ui primary button">Submit</button>
+        </div>
+    </form>
+</div>
+<%- include ("./partials/footer") %>

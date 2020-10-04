@@ -36,13 +36,36 @@ router.post("/", function(req, res){
 
 // show
 router.get("/:id", function(req, res) {
-    Bug.findById(req.params.id, function(err, foundBlog){
+    Bug.findById(req.params.id, function(err, foundBug){
         if(err){
             res.redirect(back);
         } else {
-            res.render("show", {blog:foundBlog});
+            res.render("show", {bug:foundBug});
         }
     })
 });
+
+// edit
+router.get("/:id/edit", function(req, res){
+    Bug.findById(req.params.id, function(err, foundBug){
+      if(err){
+        res.redirect("back");
+      } else {
+        res.render("edit", {bug:foundBug});
+      }
+    })
+  });
+  
+  // update
+  router.put("/:id", function(req, res){
+    Bug.findByIdAndUpdate(req.params.id, req.body.bug, function(err, updatedBug){
+      if (err){
+        res.redirect(back);
+      } else {
+        res.redirect("/bugs/" + req.params.id);
+      }
+    })
+  });
+  
 
 module.exports = router;
