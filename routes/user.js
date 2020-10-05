@@ -14,13 +14,13 @@ router.post("/register", function(req, res){
         req.body.password, 
         function(err, user){
             if(err){
-              //  req.flash("error", err.message);
-                return res.render("register");
+                req.flash("error", err.message);
+                return res.render("/register");
             } 
             passport.authenticate("local")(req, res, function(){
-         //   req.flash("success", "created account" + user.username);
-            console.log("works")
-            res.redirect("/bugs");
+                req.flash("success", "Welcome: " + user.username);
+                console.log("works")
+                res.redirect("/bugs");
         });
     });
 }); 
@@ -34,12 +34,14 @@ router.post("/login", passport.authenticate("local", {
     successRedirect: "/bugs",
     failureRedirect: "/login"}), 
     function(req, res){
+        req.flash("success", "Hello: " + user.username);
         res.redirect(back);
 });
 
 //logout
 router.get("/logout", function(req, res){
     req.logOut();
+    req.flash("success", "Goodbye");
     res.redirect("/");
 });
     
