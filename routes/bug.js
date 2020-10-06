@@ -1,6 +1,9 @@
+
+
 const express = require("express"),
       router  = express.Router(),
-      Bug = require("../models/bug");
+      Bug = require("../models/bug"),
+      Middleware = require("../middleware");
 
 // INDEX
 router.get("/", function(req, res){
@@ -20,16 +23,19 @@ router.get("/new", function(req, res){
 
 // CREATE
 router.post("/", function(req, res){
+    console.log(req.body.severity);
     Bug.create({
         summary: req.body.summary,
         stepsToReproduce: req.body.stepsToReproduce,
         expectedResults: req.body.expectedResults,
+        Severity: req.body.severity,
         actualResults: req.body.actualResults
     }, function(err, newBug){
         if(err){
             res.redirect("back");
         } else {
             res.redirect("/bugs");
+            req.flash("success", "Bug"+ newBug._id + "added")
         }
     });
 });
@@ -46,7 +52,7 @@ router.get("/:id", function(req, res) {
 });
 
 // edit
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", Middleware.isLoggedIn, function(req, res){
     Bug.findById(req.params.id, function(err, foundBug){
         if(err){
             res.redirect("back");
@@ -57,7 +63,7 @@ router.get("/:id/edit", function(req, res){
 });
   
 // update
-router.put("/:id", function(req, res){
+router.put("/:id", Middleware.isLoggedIn, function(req, res){
     Bug.findByIdAndUpdate(req.params.id, req.body.bug, function(err, updatedBug){
         if (err){
             res.redirect(back);
@@ -68,7 +74,7 @@ router.put("/:id", function(req, res){
 });
   
   // Destroy
-router.delete("/:id", function(req, res){
+router.delete("/:id", Middleware.isLoggedIn, function(req, res){
     Bug.findByIdAndRemove(req.params.id, function(err){
         if (err){
             res.redirect("/bugs");

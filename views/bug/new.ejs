@@ -1,22 +1,44 @@
 <%- include ("../partials/header") %>
-<div class="ui main text container segment">
-    <div class="ui huge header">New Bug</div>
-    <form class="ui form"action="/bugs" method="POST">
-        <div class="field">
-            <input  type="text" name="summary" placeholder="summary">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <h1>New Bug</h1>
+                <form action="/bugs" method="POST">
+                    <div class="form-group">
+                        <label>Summary</label>
+                        <textarea type="text" class="form-control" name="summary" placeholder="summary"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Severity</label>
+                        <select class="form-control" name="severity">
+                            <option value="Blocker">Blocker</option>
+                            <option value="Critical">Critical</option>
+                            <option value="Major">Major</option>
+                            <option value="Minor">Minor</option>
+                            <option value="Trivial">Trivial</option>
+                            <option value="Enhancement">Enhancement</option>
+                        </select>
+                    </div>
+                    <h4>Description</h4>
+                    <div class="form-group">
+                        <label>Steps To Reproduce</label>
+                        <textarea type="text"  class="form-control" name="stepsToReproduce" placeholder="Steps To Reproduce"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Results</label>
+                        <textarea type="text" class="form-control" name="expectedResults" placeholder="Expected Results"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Actual Results</label>
+                        <textarea type="text" class="form-control" name="actualResults" placeholder="Actual Results"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="field">
-            <input  type="text" name="stepsToReproduce" placeholder="Steps To Reproduce">
-        </div>
-        <div class="field">
-            <input  type="text" name="expectedResults" placeholder="Expected Results">
-        </div>
-        <div class="field">
-            <input  type="text" name="actualResults" placeholder="ActualResults">
-        </div>
-        <div class="field">
-            <button class="ui primary button">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>
 <%- include ("../partials/footer") %>

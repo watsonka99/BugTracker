@@ -1,10 +1,35 @@
 <%- include ("../partials/header") %>
-<h1> Show </h1>
-<a href="/bugs/<%=bug._id%>/edit" class="ui floated basic orange button">
-    edit
-    <i class ="right chevron icon"></i>
-</a>
-<form id="delete" action="/bugs/<%=bug._id%>?_method=DELETE" method="POST">
-    <button class="ui floated basic red button">Delete <i class ="right chevron icon"></i></button>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1><%= bug._id %></h1>
+                </div>
+                <div class="card-body">
+                    <h4>Summary</h4>     
+                    <p><%= bug.summary%></p> 
+                    <h4>Steps To Reproduce</h4>
+                    <p><%= bug.stepsToReproduce%></p> 
+                    <h4>Expected Results</h4>
+                    <p><%= bug.expectedResults%></p> 
+                    <h4>Actual Results</h4>
+                    <p><%= bug.actualResults%></p> 
+                    <p><%= bug.Severity%></p> 
+                    <% if(currentUser){ %>
+                        <a href="/bugs/<%=bug._id%>/edit" class="btn btn-warning">
+                            edit
+                        </a>
+                        <form id="delete" class="delete" action="/bugs/<%=bug._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    <% } %> 
+                </div>
+                <div class="card-footer text-muted">
+                    <%=bug.reported%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <%- include ("../partials/footer") %>

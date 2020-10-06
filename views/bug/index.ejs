@@ -1,23 +1,21 @@
 <%- include ("../partials/header") %>
-
-
-<div class= "ui container segment">
 <h1 class="ui header">Bugs</h1>
 <% bugs.forEach(function(bug){%>
-    <div class="ui container raised text segment">
-        
-        <div>
-            <%=bug.summary%>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bug: <%=bug._id%></h5>
+                    <p class="card-text"> <%=bug.summary%></p>   
+                    <a href="/bugs/<%=bug._id%>" class="btn btn-primary">
+                        Show
+                    </a>
+                </div>
+                <div class="card-footer text-muted">
+                    <%=bug.reported%>
+                </div>
+            </div>
         </div>
-        <%=bug.stepsToReproduce%>
-        <%=bug.expectedResults%>
-        <%=bug.actualResults%>
-        <a href="/bugs/<%=bug._id%>" class="ui floated basic blue button">
-            Show
-            <i class ="right chevron icon"></i>
-        </a>
     </div>
 <% }) %>
-</div>
-<a href="/bugs/new">bugs</a>
 <%- include ("../partials/footer") %>
