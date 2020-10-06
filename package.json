@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kieran Watson",
+  "license": "Unlicense",
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
