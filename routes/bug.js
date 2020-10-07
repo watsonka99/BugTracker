@@ -9,6 +9,7 @@ const express = require("express"),
 router.get("/", function(req, res){
     Bug.find({}, function(err, bugs){
         if (err) {
+            req.flash("error", "Failed to get bugs")
             console.log(err);
         } else {
             res.render("bug/index", {bugs: bugs});  
@@ -32,10 +33,11 @@ router.post("/", function(req, res){
         actualResults: req.body.actualResults
     }, function(err, newBug){
         if(err){
-            res.redirect("back");
-        } else {
+            req.flash("error", "Failure to add Bug, please try again later");
             res.redirect("/bugs");
-            req.flash("success", "Bug"+ newBug._id + "added")
+        } else {
+            req.flash("success", "Bug "+ newBug._id + " has been added");
+            res.redirect("/bugs");
         }
     });
 });
@@ -44,6 +46,7 @@ router.post("/", function(req, res){
 router.get("/:id", function(req, res) {
     Bug.findById(req.params.id, function(err, foundBug){
         if(err){
+            req.flash("error", "Failed to show bug");
             res.redirect(back);
         } else {
             res.render("bug/show", {bug:foundBug});
@@ -52,10 +55,11 @@ router.get("/:id", function(req, res) {
 });
 
 // edit
-router.get("/:id/edit", Middleware.isLoggedIn, function(req, res){
+router.get("/:id/edit", Middleware.checkBugOwner, function(req, res){
     Bug.findById(req.params.id, function(err, foundBug){
         if(err){
-            res.redirect("back");
+            req.flash("error", "Failed to load bug, please try again later");
+            res.redirect(back);
         } else {
             res.render("bug/edit", {bug:foundBug});
         }
@@ -63,11 +67,13 @@ router.get("/:id/edit", Middleware.isLoggedIn, function(req, res){
 });
   
 // update
-router.put("/:id", Middleware.isLoggedIn, function(req, res){
+router.put("/:id", Middleware.checkBugOwner, function(req, res){
     Bug.findByIdAndUpdate(req.params.id, req.body.bug, function(err, updatedBug){
         if (err){
+            req.flash("error", "Failed to update bug, please try again later");
             res.redirect(back);
         } else {
+            req.flash("success", req.params.id + "has been updated");
             res.redirect("/bugs/" + req.params.id);
         }
     });
@@ -77,8 +83,10 @@ router.put("/:id", Middleware.isLoggedIn, function(req, res){
 router.delete("/:id", Middleware.isLoggedIn, function(req, res){
     Bug.findByIdAndRemove(req.params.id, function(err){
         if (err){
+            req.flash("error", "Failed to delete bug " + req.params.id);
             res.redirect("/bugs");
         } else {
+            req.flash("success", "Bug " + req.params.id + " has been deleted");
             res.redirect("/bugs");
         }
     });
