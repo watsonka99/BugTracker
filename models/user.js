@@ -3,8 +3,9 @@ const mongoose = require("mongoose"),
 
 const UserSchema = new mongoose.Schema({
     username: String,
+    email: String,
     password: String,
-    reported: {type: Date, default: Date.now}
+    createdAt: {type: Date, default: Date.now}
 });
 
 UserSchema.plugin(passportLocalMongoose);

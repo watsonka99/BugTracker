@@ -6,6 +6,10 @@ const BugSchema = new mongoose.Schema({
     expectedResults: String,
     actualResults: String,
     Severity: String,
+    reportedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     reported: {type: Date, default: Date.now}
 });
 
