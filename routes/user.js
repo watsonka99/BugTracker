@@ -45,6 +45,16 @@ router.get("/logout", function(req, res){
     res.redirect("/");
 });
     
+router.get("/user/:userID", function (req, res){
+    User.findById(req.params.userID, function (err, user){
+        if (err){
+            console.log("error")
+        } else {
+            res.render("user/show")
+        }
+    })
+});
+    
 
 
 module.exports = router;
